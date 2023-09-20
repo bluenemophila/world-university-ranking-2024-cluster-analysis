@@ -12,7 +12,8 @@ Penelitian dari Elwabab [4] membawa indikator penilaian berbagai universitas dun
 
 Penelitian yang dilakukan berdasarkan data QS World University Ranking 2022 ini pada saat ini sudah kurang relevan, dikarenakan terdapat penambahan 3 indikator utama pada data QS World University Ranking 2024. Perubahan jumlah universitas yang diangkat dalam QS World University Ranking juga terjadi setiap tahunnya, dimana peningkatan jumlahnya dapat dilihat seperti pada gambar di bawah ini.
 
-![image](https://github.com/bluenemophila/world-university-ranking-2024-cluster-analysis/assets/126690692/d1b5ca76-7259-4358-a84b-d1f44e76f719)
+![image](https://github.com/bluenemophila/world-university-ranking-2024-cluster-analysis/assets/126690692/21483eaf-8b77-498a-b11f-039d4ed25f95)
+
 <p align="center">Gambar 1. Jumlah Universitas dalam QS World University Ranking Menurut Tahun</p>
 
 Adanya penambahan indikator utama dan peningkatan jumlah universitas yang diangkat membuat keterbaruan data menjadi berkurang, sehingga untuk mengetahui bagaimana perkembangan capaian universitas dunia saat ini, dapat melakukan analisis cluster dengan data indikator terbaru QS University Ranking 2024.
@@ -47,7 +48,7 @@ Untuk menyelesaikan masalah dan mencapai tujuan diatas, akan dibuat analisis _cl
 
 Pemilihan jumlah _cluster_ terbaik akan dilakukan dengan menggunakan _elbow method_ untuk mendapatkan _cluster_ dengan _inertia_ yang baik sehingga jumlah kelompok yang dihasilkan dapat merepresentasikan data dengan baik.
 
-Dalam mengevaluasi performa model, digunakan ...
+Dalam mengevaluasi performa model, digunakan Davies-Bouldin index untuk menghitung kesamaan antar _cluster_ dengan _cluster_ yang mirip. Semakin rendah indeks DBI menunjukkan semakin rendahnya rata-rata kesamaan antar _cluster_, sehingga menunjukkan _cluster_ tersebut sudah terpisah dengan baik dan hasil _clustering_ yang dilakukan sudah baik.
 
 ## — Data Understanding
 
@@ -134,12 +135,14 @@ Untuk lebih mengeksplor data, dapat dilakukan beberapa visualisasi seperti di ba
 ### Analisis universitas berdasarkan negara asal
 Dari 195 negara di dunia, hanya 104 negara memiliki universitas yang berperingkat global QS. Distribusi dari universitas berdasarkan negaranya adalah seperti berikut.
 
-![image](https://github.com/bluenemophila/world-university-ranking-2024-cluster-analysis/assets/126690692/29230160-bb7a-4a11-8cff-9060ca606b0b)
+![image](https://github.com/bluenemophila/world-university-ranking-2024-cluster-analysis/assets/126690692/f36dcf2c-2ca4-497f-bdd9-21d2d68d022c)
+
 <p align="center">Gambar 2. Jumlah Universitas dalam QS World University Ranking Menurut Negara Asal</p>
 
 Berdasarkan data tersebut juga dapat dibentuk peta visualisasi untuk jumlah universitas berperingkat di setiap negara.
 
-![newplot](https://github.com/bluenemophila/world-university-ranking-2024-cluster-analysis/assets/126690692/b8870685-99e4-45ce-88ce-9b124e748e6d)
+![university](https://github.com/bluenemophila/world-university-ranking-2024-cluster-analysis/assets/126690692/b4de5957-812e-45f5-b894-720625e41633)
+
 <p align="center">Gambar 3. Jumlah Universitas dalam QS World University Ranking Menurut Negara Asal dalam Peta</p>
 
 Universitas _QS World Ranking 2024_ didominasi berasal dari Amerika Serikat, Inggris, China, Jerman, dan Rusia.
@@ -221,7 +224,8 @@ Dapat dilihat setelah dilakukan _feature scaling_ data menjadi berada dalam rent
 
 Setelah dilakukan persiapan pada data, dapat dilakukan visualisasi dari nilai-nilai 9 indikator.
 
-![image](https://github.com/bluenemophila/world-university-ranking-2024-cluster-analysis/assets/126690692/af5584fa-003a-4cf6-9e60-7616c27a96fc)
+![image](https://github.com/bluenemophila/world-university-ranking-2024-cluster-analysis/assets/126690692/9dfe9aca-f9c1-4252-af18-def2d08b2dff)
+
 <p align="center">Gambar 4. Visualisasi Histogram 9 Indikator</p>
 
 Berdasarkan visualisasi tersebut, dapat terlihat bahwa seluruh indikator memiliki kecenderungan condong _(skew)_ ke kanan, dimana nilai mediannya lebih kecil daripada rata-ratanya. Karena pemodelan yang dilakukan adalah _unsupervised learning_ yaitu _KMeans clustering_ kecondongan distribusi ini tidak akan terlalu berpengaruh pada model sehingga analisis dapat dilanjutkan ke tahap selanjutnya.
@@ -251,7 +255,8 @@ Namun, kelemahan dari model KMeans adalah tidak bisa langsung ditentukan jumlah 
 
 _Elbow method_ menggunakan plot dari _inertia_ model, atau seberapa baik model tersebut dalam menjelaskan data, dimana secara umum semakin kecil _inertia_ model, maka hasil pengelompokkannya akan semakin baik. Namun, semakin banyak jumlah cluster maka _inertia_ akan semakin menurun, sehingga harus dipilih jumlah _cluster_ yang dapat menjelaskan data dengan baik, namun tidak terlalu banyak sehingga menyebabkan _over-fitting,_ yaitu model yang memiliki performa baik dengan data latih namun tidak bisa menjelaskan data yang belum ditemui. Cara untuk memilih _cluster_ ini adalah dengan memilih _elbow_ atau siku dari kurva, dimana _elbow_ tersebut menunjukkan titik potong optimisasi matematis yang menunjukkan penurunan _inertia_ tidak lagi menguntungkan dalam segi _cost_ model.
 
-![image](https://github.com/bluenemophila/world-university-ranking-2024-cluster-analysis/assets/126690692/bb4efcbb-ba5c-4ed7-8cea-9ea496073e8c)
+![image](https://github.com/bluenemophila/world-university-ranking-2024-cluster-analysis/assets/126690692/7b41c846-31a0-4aeb-ad27-3cfe3e204075)
+
 <p align="center">Gambar 5. Hasil Plot Elbow Method Berdasarkan Jumlah Cluster terhadap Inertia Model</p>
 
 Berdasarkan hasil yang didapatkan melalui _elbow method_ tersebut, dapat dilihat siku dari kurvanya berada pada jumlah _cluster_ sebanyak 2 kelompok. Untuk selanjutnya, dapat dilakukan pemodelan KMeans dengan _n-cluster_ = 2 untuk mengelompokkan universitas di dunia seperti di bawah ini.
@@ -270,7 +275,8 @@ Untuk melakukan evaluasi kebaikan pembagian kelompok dari algoritma KMeans, digu
 
 Hasil dari visualisasi jumlah _cluster_ dan indeks DBI-nya adalah sebagai berikut.
 
-![image](https://github.com/bluenemophila/world-university-ranking-2024-cluster-analysis/assets/126690692/19f24adc-08ab-4814-9f0b-6d982a7519f4)
+![image](https://github.com/bluenemophila/world-university-ranking-2024-cluster-analysis/assets/126690692/84d8e9cb-1050-4219-88a6-96e1b43ba833)
+
 <p align="center">Gambar 6. Hasil Plot indeks DBI Berdasarkan Jumlah Cluster</p>
 
 Berdasarkan hasil pada gambar tersebut, diketahui jumlah _cluster_ dengan indeks DBI yang paling rendah adalah sebanyak 2 kelompok. Hal ini mendukung hasil pemilihan _cluster_ terbaik yang telah dilakukan dengan _elbow method_ sebelumnya.
@@ -294,7 +300,8 @@ Dari tabel median 9 indikator tersebut, dapat terlihat untuk kelompok pertama at
 
 Dapat diamati pula korelasi antara seluruh indikator dan kelompok _cluster_ terhadap skor terbobot pemeringkatan seperti pada dibawah ini.
 
-![correlation](https://github.com/bluenemophila/world-university-ranking-2024-cluster-analysis/assets/126690692/5f2097c4-fb39-4154-9ee7-715d884f9da9)
+![correlation](https://github.com/bluenemophila/world-university-ranking-2024-cluster-analysis/assets/126690692/5eea9a25-fac7-44a7-b082-176f242da5fe)
+
 <p align="center">Gambar 7. Korelasi Indikator dan Cluster terhadap Overall Score</p>
 
 Dapat diketahui indikator yang berhubungan sangat kuat secara positif (korelasi > 0.8) dengan _overall score_ adalah _academic reputation score,_ selain itu indikator lain juga memiliki hubungan kuat (0.6 < korelasi < 0.8) dengan _overall score_ adalah _employer reputation score, sustainability score, international research network score, citations per faculty score_ dan _employment outcomes score_ selain itu _cluster_ juga berkorelasi kuat negatif dengan _overall score,_ dimana ditunjukkan cluster awal memiliki _overall score_ tinggi dan _cluster_ akhir memiliki _overall score_ rendah. Selain itu indikator yang lain memiliki hubungan yang sedang (0.4 < korelasi < 0.6) dengan _overall score._ Seluruh indikator menunjukkan korelasi yang cukup kuat dengan _overall score_ sehingga seluruh indikator dapat digunakan sebagai pertimbangan dalam analisis.
@@ -332,12 +339,14 @@ Dapat dilihat universitas-universitas tersebut memiliki skor terbobot seluruh in
 
 Jika divisualisasikan dalam peta, distribusi jumlah universitas dengan capaian indikator tinggi menurut negaranya adalah sebagai berikut.
 
-![high indicator](https://github.com/bluenemophila/world-university-ranking-2024-cluster-analysis/assets/126690692/95597d34-284f-4b5f-a14e-cf4acf3f033e)
+![high indicator](https://github.com/bluenemophila/world-university-ranking-2024-cluster-analysis/assets/126690692/1ecbe48c-819d-4ee9-8c80-0fb139d397f3)
+
 <p align="center">Gambar 8. Visualisasi Distribusi Universitas dengan Capaian Indikator Tinggi Menurut Negara</p>
 
 Dikarenakan tidak semua universitas di dunia bisa diangkat dalam QS World University Ranking 2024, khususnya universitas yang berasal dari negara-negara di Afrika, jumlah universitas dengan capaian indikator tinggi kebanyakan hanya didominasi oleh negara-negara Amerika Utara maupun Eropa.
 
-![image](https://github.com/bluenemophila/world-university-ranking-2024-cluster-analysis/assets/126690692/afb54bf1-77c5-40be-8de7-59d43486930d)
+![image](https://github.com/bluenemophila/world-university-ranking-2024-cluster-analysis/assets/126690692/e384d1a1-d1f6-4873-9959-137067bc2637)
+
 <p align="center">Gambar 9. Word Cloud Frekuensi Negara dengan Universitas dengan Capaian Indikator Tinggi</p>
 
 Berdasarkan kelompok dengan capaian indikator tinggi ini dapat dianalisis statistik deskriptifnya seperti berikut.
@@ -390,12 +399,14 @@ Dapat dilihat universitas-universitas tersebut memiliki skor terbobot seluruh in
 
 Jika divisualisasikan dalam peta, distribusi jumlah universitas dengan capaian indikator rendah menurut negaranya adalah sebagai berikut.
 
-![low indicator](https://github.com/bluenemophila/world-university-ranking-2024-cluster-analysis/assets/126690692/4cf0a110-03be-4d17-b73e-54be340887b5)
+![low indicator](https://github.com/bluenemophila/world-university-ranking-2024-cluster-analysis/assets/126690692/2cce6e27-7ed2-4eb6-bcb1-e02cc9809d90)
+
 <p align="center">Gambar 10. Visualisasi Distribusi Universitas dengan Capaian Indikator Rendah Menurut Negara</p>
 
 Dikarenakan tidak semua universitas di dunia bisa diangkat dalam QS World University Ranking 2024, khususnya universitas yang berasal dari negara-negara di Afrika, jumlah universitas dengan capaian indikator rendah tidak merepresentasikan seluruh universitas di dunia.
 
-![image](https://github.com/bluenemophila/world-university-ranking-2024-cluster-analysis/assets/126690692/ed7d2e71-187a-4a7d-8b1d-a901f16eab37)
+![image](https://github.com/bluenemophila/world-university-ranking-2024-cluster-analysis/assets/126690692/d043f7e2-c1a5-439b-bdc7-ce6f03bf6c46)
+
 <p align="center">Gambar 11. Word Cloud Frekuensi Negara dengan Universitas dengan Capaian Indikator Rendah</p>
 
 Berdasarkan kelompok dengan capaian indikator rendah ini dapat dianalisis statistik deskriptifnya seperti berikut.
@@ -419,12 +430,14 @@ Dapat dilihat dari statistik deskriptif tersebut, terdapat 1137 universitas yang
 
 Nilai keseleruhan dapat dianalisis untuk mendapatakan gambaran yang mempengaruhi supaya dapat mendapatkan nilai keseluruhan yang tinggi.
 
-![overall score](https://github.com/bluenemophila/world-university-ranking-2024-cluster-analysis/assets/126690692/0bf0d12e-b104-42a0-97fe-30aff5e43122)
+![overall score](https://github.com/bluenemophila/world-university-ranking-2024-cluster-analysis/assets/126690692/14df598c-2f70-4b57-896a-a79fd5add461)
+
 <p align="center">Gambar 12. Distribusi Rata-rata Nilai Keseluruhan Universitas Berdasarkan Negara</p>
 
 Nilai keseluruhan juga dapat dikelompokkan berdasarkan 10 peringkat teratas dan 10 peringkat terbawah seperti di bawah ini.
 
-![ranking](https://github.com/bluenemophila/world-university-ranking-2024-cluster-analysis/assets/126690692/991a87b3-14d3-4076-8dbf-13fb943c2e4b)
+![ranking](https://github.com/bluenemophila/world-university-ranking-2024-cluster-analysis/assets/126690692/43578c37-e7fc-4ecb-9939-4cfdd1c7782f)
+
 <p align="center">Gambar 13. 10 Teratas dan 10 Terbawah Rata-rata Nilai Keseluruhan Menurut Negara</p>
 
 Berdasarkan visualisasi tersebut, dapat dilihat 10 negara dengan rata-rata nilai keseluruhan teratas adalah Hong Kong, Singapura, Belanda, Swedia, Denmark, Selandia baru, Qatar, Australia, dan Belgia. Sementara itu 10 negara dengan rata-rata nilai keseluruhan terbawah adalah Paraguay, Iraq, Azerbaijan, Romania, Equador, Honduras, Panama, Maroko, Sudan, dan Bolivia.
